@@ -40,7 +40,7 @@ sudo mkdir -m 777 /my/vaultier/storage/folder
 ```
 
 ### Running the Application
-Once you have the image and storage folder setup, you can try running the application with the following command (make sure you change "/my/vaultier/storgage/folder" to whatever you chose in the previous command):
+Once you have the image and storage folder setup, you can try running the application with the following command:
 
 ```
 sudo docker run \
@@ -49,12 +49,16 @@ sudo docker run \
     --rm \
     -d \
     -v /my/vaultier/storage/folder:/vaultier_data \
+    -e "VAULTIER_DOMAIN=localhost" \
     tannerntannern/vaultier:latest
 ```
 
-After it starts up, the app will be accessible at [http://localhost:8888](http://localhost:8888).  **Note** that emails won't send properly quite yet; see the Email Configuration section below to set it up.
+After it starts up, the app will be accessible at [http://localhost:8888](http://localhost:8888).  A few things to note here:
+  - **VAULTIER_DOMAIN must be set to the domain that you plan to host with for others to access the app.**  If you plan to host internally or without a domain name, an IP address will suffice.  
+  - Be sure to put the actual storage folder you chose earlier in place of "/my/vaultier/storage/folder"
+  - Emails won't send properly quite yet; see the Email Configuration section below to set it up
 
-If everything worked properly, you should see a new **database** folder and **scripts** folder in the storage folder you chose earlier.
+If everything worked properly, you should also see a new **database** folder and **scripts** folder in the storage folder you chose earlier.
 
 ### Stopping the Application
 To stop the app, run the following command:
